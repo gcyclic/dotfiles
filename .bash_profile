@@ -1,7 +1,5 @@
-# Source ~/.zshenv, since they're shell agnostic
-[[ -f ~/.zshenv ]] && . ~/.zshenv
+# Source ~/.bashenv
+[[ -f ~/.bashenv ]] && . ~/.bashenv
 
-# Source ~/.bashrc, as said by bash info pages
-if [[ -f ~/.bashrc ]] ; then
-  . ~/.bashrc
-fi
+# Source ~/.bashrc, as said by the info pages
+[[ -f ~/.bashrc ]] && . ~/.bashrc

@@ -1,9 +1,5 @@
 # Preferred editor
-if [[ -n $SSH_CONNECTION ]]; then
-	export EDITOR='vim'
-else
-	export EDITOR='nvim'
-fi
+export EDITOR='nvim'
 
 # Misc. utilities
 eval "$(atuin init zsh)"
