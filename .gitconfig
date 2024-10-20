@@ -1,0 +1,5 @@
+[user]
+	name = gcyclic
+	email = gcyclic@noreply.codeberg.org
+[init]
+	defaultBranch = master

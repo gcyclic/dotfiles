@@ -1,5 +1,5 @@
 include /etc/sway/config.d/*
-include themes/catppuccin-macchiato
+include themes/catppuccin-mocha
 
 # Variables
 
@@ -21,23 +21,27 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
 ## Path to wallpapers
 set $papes $HOME/.wallpapers/
 
+## Format for screenshots
+set $shots $(xdg-user-dir PICTURES)/shot_$(date +'%Y%m%d%H%M%S').png
+
 # Startup programs/scripts
+exec gentoo-pipewire-launcher &
 exec mako &
 
 # Output
 output eDP-1 {
-	mode 1366x768@60Hz
-	bg "$(find $papes -type f | shuf -n 1)" fill
+  mode 1366x768@60Hz
+  bg "$(find $papes -type f | shuf -n 1)" fill
 }
 
 # Input 
 input "1:1:AT_Translated_Set_2_keyboard" {
-	xkb_layout "gb"
-	xkb_variant "dvorak"
+  xkb_layout "gb"
+  xkb_variant "dvorak"
 }
 
 input "2:7:SynPS/2_Synaptics_TouchPad" {
-	natural_scroll enabled
+  natural_scroll enabled
 }
 
 # Floating modifier
@@ -56,7 +60,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec 'swaymsg exit'
+bindsym $mod+Shift+e exec swaymsg exit
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
 
@@ -125,39 +129,37 @@ bindsym $mod+minus scratchpad show
 
 # Resizing containers
 mode "resize" {
-	bindsym $left resize shrink width 10px
-	bindsym $down resize grow height 10px
-	bindsym $up resize shrink height 10px
-	bindsym $right resize grow width 10px
+  bindsym $left resize shrink width 10px
+  bindsym $down resize grow height 10px
+  bindsym $up resize shrink height 10px
+  bindsym $right resize grow width 10px
 
-	bindsym Left resize shrink width 10px
-	bindsym Down resize grow height 10px
-	bindsym Up resize shrink height 10px
-	bindsym Right resize grow width 10px
+  bindsym Left resize shrink width 10px
+  bindsym Down resize grow height 10px
+  bindsym Up resize shrink height 10px
+  bindsym Right resize grow width 10px
     
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # Status bar
 bar {
-	gaps 8
-	position bottom
-	status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-	tray_output none
-	colors {
-		background         $base
-		statusline         $text
-		focused_statusline $text
-		focused_separator  $base
-
-		focused_workspace  $base  $mauve    $crust
-		active_workspace   $base  $surface2 $text
-		inactive_workspace $base  $base     $text
-		urgent_workspace   $base  $red      $crust
-	}
+  colors {
+    background $based1
+    statusline $text
+    focused_statusline $text
+    focused_separator $based1
+    focused_workspace $based1 $mauved1 $crust
+    active_workspace $based1 $surface2d1 $text
+    inactive_workspace $based1 $based1 $text
+    urgent_workspace $based1 $redd1 $crust
+  }
+  gaps 4
+  tray_output none
+  status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 }
 
 # Client colours
@@ -168,8 +170,14 @@ client.urgent $peach $base $peach $overlay0 $peach
 client.placeholder $overlay0 $base $text $overlay0 $overlay0
 client.background $base
 
+# Screen capture
+bindsym Print exec grim - | wl-copy
+bindsym Control+Print exec grim -g "$(slurp)" - | wl-copy
+bindsym Alt+Print exec grim $shots
+bindsym Alt+Control+Print exec grim -g "$(slurp)" $shots
+
 # Xcursor theme
-seat seat0 xcursor_theme Bibata-Modern-Classic
+seat seat0 xcursor_theme Adwaita
 
 # Window rules
 for_window [app_id="mpv"] fullscreen enable

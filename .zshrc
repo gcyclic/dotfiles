@@ -1,22 +1,20 @@
-# User configuration
-
-## Preferred editor
+# Preferred editor
 if [[ -n $SSH_CONNECTION ]]; then
 	export EDITOR='vim'
 else
 	export EDITOR='nvim'
 fi
 
-## Misc. utilities
+# Misc. utilities
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 
-## Completion system
+# Completion system
 autoload -Uz compinit
 compinit
 
-## Set LS_COLORS
+# Set LS_COLORS
 eval "$(dircolors -b)"
 
-## Aliases
+# Aliases
 . $HOME/.aliases
