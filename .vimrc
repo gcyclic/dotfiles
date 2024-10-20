@@ -1,6 +1,6 @@
 set number
 set noswapfile
-set cursorline " highlight current cursorline
+set cursorline  " highlight current cursorline
 set cursorlineopt=number
 set clipboard=unnamedplus  " use system clipboard
 
